@@ -8,7 +8,8 @@ import java.util.List;
 /**
  * 数学函数扩展工具类
  * <p>
- * exp4j 内置函数列表 </br>
+ * exp4j 内置函数列表
+ * </p>
  * <p>abs（绝对值），acos（反余弦），asin（反正弦），atan（反正切），cbrt（立方根），ceil（最接近的上界整数），
  * cos（余弦），cosh（双曲余弦），exp（e^x），floor（最接近的下界整数），log（自然对数(底数 e)），log10（对数( 底数0)），
  * log2（对数(底数2)），sin（正弦），sinh（双曲正弦），sqrt（平方根），tan（正切），tanh（双曲正切），signum（signum 函数）</p>

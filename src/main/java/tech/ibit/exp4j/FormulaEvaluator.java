@@ -213,6 +213,7 @@ public class FormulaEvaluator {
     /**
      * 计算
      *
+     * @param iVariable 计算变量值
      * @return 计算结果
      */
     public Double evaluate(IVariable iVariable) {

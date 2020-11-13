@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 关系工具类
+ * 关系计算器
  *
  * @author iBit程序猿
  */

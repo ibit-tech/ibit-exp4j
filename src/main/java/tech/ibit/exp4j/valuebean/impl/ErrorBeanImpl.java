@@ -32,6 +32,7 @@ public class ErrorBeanImpl {
      * 设置计算错误内容
      *
      * @param variable 变量
+     * @param error    错误信息
      */
     public void setError(String variable, ErrorEntity error) {
         errorMap.put(variable, error);
@@ -41,6 +42,7 @@ public class ErrorBeanImpl {
      * 获取错误信息
      *
      * @param variable 变量
+     * @return 错误信息
      */
     public String getErrorMessage(String variable) {
         ErrorEntity errorEntity = errorMap.get(variable);

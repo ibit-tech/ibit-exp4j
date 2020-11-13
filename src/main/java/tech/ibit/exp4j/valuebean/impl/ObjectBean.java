@@ -34,7 +34,15 @@ public class ObjectBean extends ErrorBeanImpl implements IVariable {
      */
     private BigDecimal defaultValue;
 
-    public ObjectBean(Object object, int calculationScale, int displayScale, BigDecimal defaultValue) {
+    /**
+     * 构造函数
+     *
+     * @param object           对象
+     * @param calculationScale 计算精度
+     * @param displayScale     显示精度
+     * @param defaultValue     默认值
+     */
+    private ObjectBean(Object object, int calculationScale, int displayScale, BigDecimal defaultValue) {
         this.object = object;
         this.calculationScale = calculationScale;
         this.displayScale = displayScale;
@@ -43,7 +51,21 @@ public class ObjectBean extends ErrorBeanImpl implements IVariable {
         }
     }
 
+    /**
+     * 获取 ObjectBean 实例
+     *
+     * @param object           对象
+     * @param calculationScale 计算精度
+     * @param displayScale     显示精度
+     * @param defaultValue     默认值
+     * @return ObjectBean 实例
+     */
+    public static ObjectBean getInstance(Object object, int calculationScale, int displayScale, BigDecimal defaultValue) {
+        return new ObjectBean(object, calculationScale, displayScale, defaultValue);
+    }
+
     @Override
+
     public BigDecimal getValue(String variable) {
 
         try {

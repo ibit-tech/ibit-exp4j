@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * 公式计算（多个公式）
+ * 公式计算器（多个公式）
  *
  * @author iBit程序猿
  */

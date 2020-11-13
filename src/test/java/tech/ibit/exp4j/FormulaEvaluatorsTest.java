@@ -66,7 +66,7 @@ public class FormulaEvaluatorsTest {
         System.out.println("转换公式：" + formulaMap);
 
 
-        IVariable variable = new ObjectBean(new Param(), 4, 2, BigDecimal.ZERO);
+        IVariable variable = ObjectBean.getInstance(new Param(), 4, 2, BigDecimal.ZERO);
         variable.setValue("c", 5.8);
         variable.setValue("e", 2.2);
         //variable.setValue("F", 1.0);

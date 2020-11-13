@@ -33,7 +33,7 @@ public class FormulaEntity {
     /**
      * 公式key（等号左边部分）
      */
-    private String formulaKey;
+    private final String formulaKey;
 
     /**
      * 公式部分（等号右边部分）
