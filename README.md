@@ -304,11 +304,11 @@ public Set<String> getEffectedNodeNames(String nodeName);
 
 构造出如下关系树（箭头指向影响节点）：
 
-![](https://x-halo.oss-cn-beijing.aliyuncs.com/halo/image_1606975680869.png)
+![](image_1606975680869.png)
 
 获取节点（H）所影响节点，如下所示：
 
-![](https://x-halo.oss-cn-beijing.aliyuncs.com/halo/image_1606975803541.png)
+![](image_1606975803541.png)
 
 红色箭头代表影响的节点流转。上图可以看出，节点 H 影响的节点有 E、D、B、A。
 

@@ -6,7 +6,7 @@
 
     <groupId>tech.ibit</groupId>
     <artifactId>ibit-exp4j</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>ibit-exp4j</name>
     <url>https://github.com/ibit-tech/ibit-exp4j</url>
