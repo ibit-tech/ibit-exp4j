@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
  * Exp4jDemo
  *
  * @author iBit程序猿
- *
  */
 public class Exp4jDemo {
 
@@ -55,7 +54,7 @@ public class Exp4jDemo {
     @Test
     public void example3() {
         double result = new ExpressionBuilder("2cos(xy)")
-                .variables("x","y")
+                .variables("x", "y")
                 .build()
                 .setVariable("x", 0.5d)
                 .setVariable("y", 0.25d)
@@ -67,9 +66,9 @@ public class Exp4jDemo {
     @Test
     public void example4() {
         String expr = "pi+π+e+φ";
-        double expected = 2*Math.PI + Math.E + 1.61803398874d;
+        double expected = 2 * Math.PI + Math.E + 1.61803398874d;
         Expression e = new ExpressionBuilder(expr).build();
-        assertEquals(expected, e.evaluate(),0d);
+        assertEquals(expected, e.evaluate(), 0d);
     }
 
     // Scientific notation
@@ -78,7 +77,7 @@ public class Exp4jDemo {
         String expr = "7.2973525698e-3";
         double expected = Double.parseDouble(expr);
         Expression e = new ExpressionBuilder(expr).build();
-        assertEquals(expected, e.evaluate(),0d);
+        assertEquals(expected, e.evaluate(), 0d);
     }
 
     // Custom functions
@@ -202,7 +201,7 @@ public class Exp4jDemo {
         assertFalse(res.isValid());
         assertEquals(1, res.getErrors().size());
 
-        e.setVariable("x",1d);
+        e.setVariable("x", 1d);
         res = e.validate();
         assertTrue(res.isValid());
     }

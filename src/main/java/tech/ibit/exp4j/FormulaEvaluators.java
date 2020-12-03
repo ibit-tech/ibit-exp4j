@@ -38,7 +38,7 @@ public class FormulaEvaluators {
      * 构造函数
      *
      * @param variablePrefix    变量前缀
-     * @param formulaProperties 公式配置
+     * @param formulaProperties 公式配置（公式键:公式部分）
      */
     public FormulaEvaluators(String variablePrefix, Map<String, String> formulaProperties) {
         this(variablePrefix, formulaProperties, null, null);
@@ -48,9 +48,9 @@ public class FormulaEvaluators {
      * 构造函数
      *
      * @param variablePrefix    变量前缀
-     * @param formulaProperties 公式配置
+     * @param formulaProperties 公式配置（公式键:公式部分）
      * @param operators         自定义操作符
-     * @param functions         公式配置
+     * @param functions         自定义操作符
      */
     public FormulaEvaluators(String variablePrefix, Map<String, String> formulaProperties
             , List<Operator> operators, List<Function> functions) {
@@ -58,7 +58,6 @@ public class FormulaEvaluators {
         calculationOrders = new LinkedHashSet<>();
         initCalculationOrders(variablePrefix, formulaProperties, operators, functions);
     }
-
 
 
     /**
@@ -109,7 +108,8 @@ public class FormulaEvaluators {
 
             formulaProperties.forEach((formulaKey, formulaPart) -> {
 
-                FormulaEvaluator evaluator = new FormulaEvaluator(variablePrefix, formulaKey, formulaPart, operators, functions);
+                FormulaEvaluator evaluator = new FormulaEvaluator(variablePrefix, formulaKey
+                        , formulaPart, operators, functions);
 
                 FormulaEntity formulaEntity = evaluator.getFormulaEntity();
                 formulaEvaluatorMap.put(formulaEntity.getFormulaKey(), evaluator);
@@ -126,7 +126,7 @@ public class FormulaEvaluators {
     /**
      * 递归初始化公式
      *
-     * @param formulaKey  公式key
+     * @param formulaKey  公式键（等号左边）
      * @param variable    变量名
      * @param existedKeys 排序字段
      */

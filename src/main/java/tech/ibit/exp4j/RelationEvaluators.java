@@ -29,10 +29,10 @@ public class RelationEvaluators {
     /**
      * 构造函数
      *
-     * @param relationEffecteds 关系对
+     * @param effectedRelations 关系对
      */
-    public RelationEvaluators(RelationEffected... relationEffecteds) {
-        initRelationNodeMapByRelationPairs(relationEffecteds);
+    public RelationEvaluators(EffectedRelation... effectedRelations) {
+        initRelationNodeMapByRelationPairs(effectedRelations);
     }
 
 
@@ -41,17 +41,17 @@ public class RelationEvaluators {
      *
      * @return 关系对列表
      */
-    public List<RelationEffected> getRelationPairs() {
-        List<RelationEffected> relationEffecteds = new ArrayList<>();
+    public List<EffectedRelation> getRelationPairs() {
+        List<EffectedRelation> effectedRelations = new ArrayList<>();
         relationNodeMap.forEach((nodeName, node) -> {
             Set<String> childNames = node.getChildrenNodeNames();
             if (childNames.isEmpty()) {
-                relationEffecteds.add(new RelationEffected(nodeName));
+                effectedRelations.add(new EffectedRelation(nodeName));
             } else {
-                childNames.forEach(childName -> relationEffecteds.add(new RelationEffected(nodeName, childName)));
+                childNames.forEach(childName -> effectedRelations.add(new EffectedRelation(nodeName, childName)));
             }
         });
-        return relationEffecteds;
+        return effectedRelations;
     }
 
     /**
@@ -60,7 +60,7 @@ public class RelationEvaluators {
      * @param nodeName 节点名称
      * @return 受影响的节点名称列表
      */
-    public Set<String> getNodeNamesEffected(String nodeName) {
+    public Set<String> getEffectedNodeNames(String nodeName) {
         RelationEntity relationEntity = relationNodeMap.get(nodeName);
         return null == relationEntity
                 ? Collections.emptySet()
@@ -107,24 +107,24 @@ public class RelationEvaluators {
     /**
      * 初始化关系节点map
      *
-     * @param relationEffecteds 公式实体
+     * @param effectedRelations 公式实体
      */
-    private void initRelationNodeMapByRelationPairs(RelationEffected[] relationEffecteds) {
+    private void initRelationNodeMapByRelationPairs(EffectedRelation[] effectedRelations) {
         relationNodeMap = new LinkedHashMap<>();
 
-        if (null != relationEffecteds) {
-            for (RelationEffected relationEffected : relationEffecteds) {
+        if (null != effectedRelations) {
+            for (EffectedRelation effectedRelation : effectedRelations) {
                 // nodeName相当于变量， nodeNameEffected相当于等式左边
-                String variable = relationEffected.getNodeName();
+                String variable = effectedRelation.getNodeName();
 
-                if (relationEffected.isUnaffected()) {
+                if (effectedRelation.isUnaffected()) {
                     if (!relationNodeMap.containsKey(variable)) {
                         relationNodeMap.put(variable, new RelationEntity(variable));
                     }
                     continue;
                 }
 
-                String formulaKey = relationEffected.getNodeNameEffected();
+                String formulaKey = effectedRelation.getEffectedNodeName();
                 if (!relationNodeMap.containsKey(formulaKey)) {
                     relationNodeMap.put(formulaKey, new RelationEntity(formulaKey));
                 }

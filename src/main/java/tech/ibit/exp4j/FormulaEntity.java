@@ -60,8 +60,8 @@ public class FormulaEntity {
     /**
      * 构造函数
      *
-     * @param formulaKey  公式key
-     * @param formulaPart 公式
+     * @param formulaKey  公式键（等号左边）
+     * @param formulaPart 公式部分（等号右边）
      */
     public FormulaEntity(String formulaKey, String formulaPart) {
         this(null, formulaKey, formulaPart);
@@ -71,8 +71,8 @@ public class FormulaEntity {
      * 构造函数
      *
      * @param variablePrefix 变量前缀（标识变量）
-     * @param formulaKey     公式key
-     * @param formulaPart    公式
+     * @param formulaKey     公式键（等号左边）
+     * @param formulaPart    公式部分（等号右边）
      */
     public FormulaEntity(String variablePrefix, String formulaKey, String formulaPart) {
         this.variablePrefix = StringUtils.isBlank(variablePrefix) ? DEFAULT_VARIABLE_PREFIX : variablePrefix.trim();

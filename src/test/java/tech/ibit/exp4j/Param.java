@@ -10,7 +10,6 @@ import java.util.StringJoiner;
  * 定义参数类
  *
  * @author iBit程序猿
- *
  */
 public class Param {
     private BigDecimal a;

@@ -9,7 +9,6 @@ import java.util.Set;
  * 公式实体TestCase
  *
  * @author iBit程序猿
- *
  */
 public class FormulaEntityTest {
 
@@ -39,9 +38,7 @@ public class FormulaEntityTest {
         System.out.println(formulaEntity.getFormulaPart());
         System.out.println(formulaEntity.getVariableNames());
 
-        System.out.println((int)"\u00A0".charAt(0));
-
-
+        System.out.println((int) "\u00A0".charAt(0));
 
 
     }

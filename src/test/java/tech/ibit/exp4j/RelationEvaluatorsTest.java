@@ -1,8 +1,8 @@
 package tech.ibit.exp4j;
 
-import tech.ibit.exp4j.exception.CircularException;
 import org.junit.Assert;
 import org.junit.Test;
+import tech.ibit.exp4j.exception.CircularException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,7 +13,6 @@ import static org.junit.Assert.assertTrue;
  * 关系工具类
  *
  * @author iBit程序猿
- *
  */
 public class RelationEvaluatorsTest {
 
@@ -30,25 +29,25 @@ public class RelationEvaluatorsTest {
         List<FormulaEntity> formulaEntities = getFormulaEntities(originalFormulaMap);
         RelationEvaluators relationEvaluators = new RelationEvaluators(formulaEntities.toArray(new FormulaEntity[0]));
         containsAll(relationEvaluators.getRelationPairs(), 8,
-                new RelationEffected("F", "E"),
-                new RelationEffected("H", "E"),
-                new RelationEffected("E", "D"),
-                new RelationEffected("C", "B"),
-                new RelationEffected("D", "B"),
-                new RelationEffected("B", "A"),
-                new RelationEffected("A"),
-                new RelationEffected("G"));
+                new EffectedRelation("F", "E"),
+                new EffectedRelation("H", "E"),
+                new EffectedRelation("E", "D"),
+                new EffectedRelation("C", "B"),
+                new EffectedRelation("D", "B"),
+                new EffectedRelation("B", "A"),
+                new EffectedRelation("A"),
+                new EffectedRelation("G"));
 
-        Set<String> effectiveNodeNames = relationEvaluators.getNodeNamesEffected("H");
+        Set<String> effectiveNodeNames = relationEvaluators.getEffectedNodeNames("H");
 
         // 影响关系链
-        Assert.assertArrayEquals(new String[] {"E", "D", "B", "A"}, effectiveNodeNames.toArray(new String[0]));
+        Assert.assertArrayEquals(new String[]{"E", "D", "B", "A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("A");
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("A");
         assertTrue(effectiveNodeNames.isEmpty());
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("C");
-        Assert.assertArrayEquals(new String[] {"B", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("C");
+        Assert.assertArrayEquals(new String[]{"B", "A"}, effectiveNodeNames.toArray(new String[0]));
     }
 
 
@@ -60,42 +59,42 @@ public class RelationEvaluatorsTest {
 
         RelationEvaluators relationEvaluators = new RelationEvaluators(formulaEntities.toArray(new FormulaEntity[0]));
         containsAll(relationEvaluators.getRelationPairs(), 7,
-                new RelationEffected("A"),
-                new RelationEffected("F", "B"),
-                new RelationEffected("G", "B"),
-                new RelationEffected("B", "E"),
-                new RelationEffected("D", "C"),
-                new RelationEffected("E", "C"),
-                new RelationEffected("C", "A"));
+                new EffectedRelation("A"),
+                new EffectedRelation("F", "B"),
+                new EffectedRelation("G", "B"),
+                new EffectedRelation("B", "E"),
+                new EffectedRelation("D", "C"),
+                new EffectedRelation("E", "C"),
+                new EffectedRelation("C", "A"));
 
-        Set<String> effectiveNodeNames = relationEvaluators.getNodeNamesEffected("G");
-        Assert.assertArrayEquals(new String[] {"B", "E", "C", "A"}, effectiveNodeNames.toArray(new String[0]));
+        Set<String> effectiveNodeNames = relationEvaluators.getEffectedNodeNames("G");
+        Assert.assertArrayEquals(new String[]{"B", "E", "C", "A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("F");
-        Assert.assertArrayEquals(new String[] {"B", "E", "C", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("F");
+        Assert.assertArrayEquals(new String[]{"B", "E", "C", "A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("D");
-        Assert.assertArrayEquals(new String[] {"C", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("D");
+        Assert.assertArrayEquals(new String[]{"C", "A"}, effectiveNodeNames.toArray(new String[0]));
 
 
-        relationEvaluators = new RelationEvaluators(relationEvaluators.getRelationPairs().toArray(new RelationEffected[0]));
+        relationEvaluators = new RelationEvaluators(relationEvaluators.getRelationPairs().toArray(new EffectedRelation[0]));
         containsAll(relationEvaluators.getRelationPairs(), 7,
-                new RelationEffected("A"),
-                new RelationEffected("F", "B"),
-                new RelationEffected("G", "B"),
-                new RelationEffected("B", "E"),
-                new RelationEffected("D", "C"),
-                new RelationEffected("E", "C"),
-                new RelationEffected("C", "A"));
+                new EffectedRelation("A"),
+                new EffectedRelation("F", "B"),
+                new EffectedRelation("G", "B"),
+                new EffectedRelation("B", "E"),
+                new EffectedRelation("D", "C"),
+                new EffectedRelation("E", "C"),
+                new EffectedRelation("C", "A"));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("G");
-        Assert.assertArrayEquals(new String[] {"B", "E", "C", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("G");
+        Assert.assertArrayEquals(new String[]{"B", "E", "C", "A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("F");
-        Assert.assertArrayEquals(new String[] {"B", "E", "C", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("F");
+        Assert.assertArrayEquals(new String[]{"B", "E", "C", "A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("D");
-        Assert.assertArrayEquals(new String[] {"C", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("D");
+        Assert.assertArrayEquals(new String[]{"C", "A"}, effectiveNodeNames.toArray(new String[0]));
     }
 
 
@@ -112,55 +111,55 @@ public class RelationEvaluatorsTest {
 
         RelationEvaluators relationEvaluators = new RelationEvaluators(formulaEntities.toArray(new FormulaEntity[0]));
         containsAll(relationEvaluators.getRelationPairs(), 7,
-                new RelationEffected("A"),
-                new RelationEffected("B", "A"),
-                new RelationEffected("C", "A"),
-                new RelationEffected("E", "B"),
-                new RelationEffected("D", "B"),
-                new RelationEffected("D", "C"),
-                new RelationEffected("F", "C"));
+                new EffectedRelation("A"),
+                new EffectedRelation("B", "A"),
+                new EffectedRelation("C", "A"),
+                new EffectedRelation("E", "B"),
+                new EffectedRelation("D", "B"),
+                new EffectedRelation("D", "C"),
+                new EffectedRelation("F", "C"));
 
-        Set<String> effectiveNodeNames = relationEvaluators.getNodeNamesEffected("D");
-        Assert.assertArrayEquals(new String[] {"B", "A", "C"}, effectiveNodeNames.toArray(new String[0]));
+        Set<String> effectiveNodeNames = relationEvaluators.getEffectedNodeNames("D");
+        Assert.assertArrayEquals(new String[]{"B", "A", "C"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("F");
-        Assert.assertArrayEquals(new String[] {"C", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("F");
+        Assert.assertArrayEquals(new String[]{"C", "A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("E");
-        Assert.assertArrayEquals(new String[] {"B", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("E");
+        Assert.assertArrayEquals(new String[]{"B", "A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("C");
-        Assert.assertArrayEquals(new String[] {"A"}, effectiveNodeNames.toArray(new String[0]));
-
-
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("B");
-        Assert.assertArrayEquals(new String[] {"A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("C");
+        Assert.assertArrayEquals(new String[]{"A"}, effectiveNodeNames.toArray(new String[0]));
 
 
-        relationEvaluators = new RelationEvaluators(relationEvaluators.getRelationPairs().toArray(new RelationEffected[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("B");
+        Assert.assertArrayEquals(new String[]{"A"}, effectiveNodeNames.toArray(new String[0]));
+
+
+        relationEvaluators = new RelationEvaluators(relationEvaluators.getRelationPairs().toArray(new EffectedRelation[0]));
         containsAll(relationEvaluators.getRelationPairs(), 7,
-                new RelationEffected("A"),
-                new RelationEffected("B", "A"),
-                new RelationEffected("C", "A"),
-                new RelationEffected("E", "B"),
-                new RelationEffected("D", "B"),
-                new RelationEffected("D", "C"),
-                new RelationEffected("F", "C"));
+                new EffectedRelation("A"),
+                new EffectedRelation("B", "A"),
+                new EffectedRelation("C", "A"),
+                new EffectedRelation("E", "B"),
+                new EffectedRelation("D", "B"),
+                new EffectedRelation("D", "C"),
+                new EffectedRelation("F", "C"));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("D");
-        Assert.assertArrayEquals(new String[] {"B", "A", "C"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("D");
+        Assert.assertArrayEquals(new String[]{"B", "A", "C"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("F");
-        Assert.assertArrayEquals(new String[] {"C", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("F");
+        Assert.assertArrayEquals(new String[]{"C", "A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("E");
-        Assert.assertArrayEquals(new String[] {"B", "A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("E");
+        Assert.assertArrayEquals(new String[]{"B", "A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("C");
-        Assert.assertArrayEquals(new String[] {"A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("C");
+        Assert.assertArrayEquals(new String[]{"A"}, effectiveNodeNames.toArray(new String[0]));
 
-        effectiveNodeNames = relationEvaluators.getNodeNamesEffected("B");
-        Assert.assertArrayEquals(new String[] {"A"}, effectiveNodeNames.toArray(new String[0]));
+        effectiveNodeNames = relationEvaluators.getEffectedNodeNames("B");
+        Assert.assertArrayEquals(new String[]{"A"}, effectiveNodeNames.toArray(new String[0]));
     }
 
     @Test(expected = CircularException.class)
@@ -177,7 +176,7 @@ public class RelationEvaluatorsTest {
 
     @Test(expected = CircularException.class)
     public void testException2() {
-        new RelationEvaluators(new RelationEffected("A", "B"), new RelationEffected("B", "A"));
+        new RelationEvaluators(new EffectedRelation("A", "B"), new EffectedRelation("B", "A"));
     }
 
     @Test
@@ -187,7 +186,7 @@ public class RelationEvaluatorsTest {
 
         // 获取从 B -> A 的全路径
         List<String> fullPaths = relationEvaluators.getRelationNode("B").getFullPaths("A");
-        Assert.assertArrayEquals(new String[] {"B", "E", "C", "A"}, fullPaths.toArray(new String[0]));
+        Assert.assertArrayEquals(new String[]{"B", "E", "C", "A"}, fullPaths.toArray(new String[0]));
 
         fullPaths = relationEvaluators.getRelationNode("B").getFullPaths("F");
         assertTrue(fullPaths.isEmpty());
@@ -210,12 +209,12 @@ public class RelationEvaluatorsTest {
         return formulaEntities;
     }
 
-    private void containsAll(List<RelationEffected> actualRelationEffecteds, int size, RelationEffected... expectedRelationEffecteds) {
-        Set<String> actualRelationPairStrSet = actualRelationEffecteds
-                .stream().map(RelationEffected::toString).collect(Collectors.toSet());
-        Assert.assertEquals(size, actualRelationEffecteds.size());
-        for (RelationEffected expectedRelationEffected : expectedRelationEffecteds) {
-            assertTrue(actualRelationPairStrSet.contains(expectedRelationEffected.toString()));
+    private void containsAll(List<EffectedRelation> actualEffectedRelations, int size, EffectedRelation... expectedEffectedRelations) {
+        Set<String> actualRelationPairStrSet = actualEffectedRelations
+                .stream().map(EffectedRelation::toString).collect(Collectors.toSet());
+        Assert.assertEquals(size, actualEffectedRelations.size());
+        for (EffectedRelation expectedEffectedRelation : expectedEffectedRelations) {
+            assertTrue(actualRelationPairStrSet.contains(expectedEffectedRelation.toString()));
         }
     }
 }

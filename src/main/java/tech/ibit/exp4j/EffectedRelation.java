@@ -6,7 +6,7 @@ package tech.ibit.exp4j;
  *
  * @author iBit程序猿
  */
-public class RelationEffected {
+public class EffectedRelation {
 
     /**
      * 节点名称
@@ -16,15 +16,15 @@ public class RelationEffected {
     /**
      * 受影响节点名称
      */
-    private final String nodeNameEffected;
+    private final String effectedNodeName;
 
-    public RelationEffected(String nodeName) {
+    public EffectedRelation(String nodeName) {
         this(nodeName, null);
     }
 
-    public RelationEffected(String nodeName, String nodeNameEffected) {
+    public EffectedRelation(String nodeName, String effectedNodeName) {
         this.nodeName = nodeName;
-        this.nodeNameEffected = nodeNameEffected;
+        this.effectedNodeName = effectedNodeName;
     }
 
     /**
@@ -33,12 +33,12 @@ public class RelationEffected {
      * @return 判断结果
      */
     public boolean isUnaffected() {
-        return null == nodeNameEffected;
+        return null == effectedNodeName;
     }
 
     @Override
     public String toString() {
-        return nodeName + " -> " + (isUnaffected() ? "!NONE" : nodeNameEffected);
+        return nodeName + " -> " + (isUnaffected() ? "!NONE" : effectedNodeName);
     }
 
     /**
@@ -55,7 +55,7 @@ public class RelationEffected {
      *
      * @return the value of nodeNameEffected
      */
-    public String getNodeNameEffected() {
-        return nodeNameEffected;
+    public String getEffectedNodeName() {
+        return effectedNodeName;
     }
 }

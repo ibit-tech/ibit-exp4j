@@ -59,8 +59,8 @@ public class FormulaEvaluator {
     /**
      * 构造函数
      *
-     * @param formulaKey  公式key
-     * @param formulaPart 公式
+     * @param formulaKey  公式键（等号左边）
+     * @param formulaPart 公式部分（等号右边）
      */
     public FormulaEvaluator(String formulaKey, String formulaPart) {
         this(null, formulaKey, formulaPart, null, null);
@@ -70,8 +70,8 @@ public class FormulaEvaluator {
      * 构造函数
      *
      * @param variablePrefix 变量前缀（标识变量）
-     * @param formulaKey     公式key
-     * @param formulaPart    公式
+     * @param formulaKey     公式键（等号左边）
+     * @param formulaPart    公式部分（等号右边）
      */
     public FormulaEvaluator(String variablePrefix, String formulaKey, String formulaPart) {
         this(variablePrefix, formulaKey, formulaPart, null, null);
@@ -80,10 +80,10 @@ public class FormulaEvaluator {
     /**
      * 构造函数
      *
-     * @param formulaKey  公式key
-     * @param formulaPart 公式
+     * @param formulaKey  公式键（等号左边）
+     * @param formulaPart 公式部分（等号右边）
      * @param operators   自定义符号列表
-     * @param functions   自定义方法列表
+     * @param functions   自定义函数列表
      */
     public FormulaEvaluator(String formulaKey, String formulaPart, List<Operator> operators, List<Function> functions) {
         this(null, formulaKey, formulaPart, operators, functions);
@@ -93,10 +93,10 @@ public class FormulaEvaluator {
      * 构造函数
      *
      * @param variablePrefix 变量前缀（标识变量）
-     * @param formulaKey     公式key
-     * @param formulaPart    公式
+     * @param formulaKey     公式键（等号左边）
+     * @param formulaPart    公式部分（等号右边）
      * @param operators      自定义符号列表
-     * @param functions      自定义方法列表
+     * @param functions      自定义函数列表
      */
     public FormulaEvaluator(String variablePrefix, String formulaKey, String formulaPart, List<Operator> operators, List<Function> functions) {
 
@@ -128,11 +128,11 @@ public class FormulaEvaluator {
     }
 
     /**
-     * 获取自定义方法
+     * 获取自定义函数
      *
      * @param formula   公式
-     * @param functions 自定义方法列表
-     * @return 自定义方法列表
+     * @param functions 自定义函数列表
+     * @return 自定义函数列表
      */
     private List<Function> getFunctions(String formula, List<Function> functions) {
         if (null == functions) {

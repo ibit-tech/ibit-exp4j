@@ -1,10 +1,10 @@
 package tech.ibit.exp4j;
 
+import org.junit.Test;
 import tech.ibit.exp4j.utils.MathFunctionEnhanceUtils;
 import tech.ibit.exp4j.utils.OperatorEnhanceUtils;
 import tech.ibit.exp4j.valuebean.IVariable;
 import tech.ibit.exp4j.valuebean.impl.ResultMapBean;
-import org.junit.Test;
 
 import java.math.BigDecimal;
 
@@ -15,7 +15,6 @@ import static org.junit.Assert.assertNull;
  * 公式计算TestCase
  *
  * @author iBit程序猿
- *
  */
 public class FormulaEvaluatorTest {
 
@@ -66,9 +65,6 @@ public class FormulaEvaluatorTest {
         variable.setValue("a", BigDecimal.TEN);
         assertNull(evaluator.evaluate(null));
     }
-
-
-
 
     // 默认变量前缀
     @Test
@@ -135,36 +131,45 @@ public class FormulaEvaluatorTest {
         variable.setValue("a", BigDecimal.TEN);
         variable.setValue("b", BigDecimal.ONE);
 
-        FormulaEvaluator evaluator = new FormulaEvaluator( "#c", "#a>#b"
+        FormulaEvaluator evaluator = new FormulaEvaluator("#c", "#a>#b"
                 , OperatorEnhanceUtils.getOperators(), null);
         assertEquals(BigDecimal.ONE.doubleValue(), evaluator.evaluate(variable), 0);
 
-        evaluator = new FormulaEvaluator( "#c", "#a>=#b"
+        evaluator = new FormulaEvaluator("#c", "#a>=#b"
                 , OperatorEnhanceUtils.getOperators(), null);
         assertEquals(BigDecimal.ONE.doubleValue(), evaluator.evaluate(variable), 0);
 
-        evaluator = new FormulaEvaluator( "#c", "#a==#b"
+        evaluator = new FormulaEvaluator("#c", "#a==#b"
                 , OperatorEnhanceUtils.getOperators(), null);
         assertEquals(BigDecimal.ZERO.doubleValue(), evaluator.evaluate(variable), 0);
 
-        evaluator = new FormulaEvaluator( "#c", "#a<#b"
+        evaluator = new FormulaEvaluator("#c", "#a<#b"
                 , OperatorEnhanceUtils.getOperators(), null);
         assertEquals(BigDecimal.ZERO.doubleValue(), evaluator.evaluate(variable), 0);
 
-        evaluator = new FormulaEvaluator( "#c", "#a<=#b"
+        evaluator = new FormulaEvaluator("#c", "#a<=#b"
                 , OperatorEnhanceUtils.getOperators(), null);
         assertEquals(BigDecimal.ZERO.doubleValue(), evaluator.evaluate(variable), 0);
 
         variable.setValue("a", (Double) null);
-        evaluator = new FormulaEvaluator( "#c", "#a<=#b"
+        evaluator = new FormulaEvaluator("#c", "#a<=#b"
                 , OperatorEnhanceUtils.getOperators(), null);
         assertEquals(BigDecimal.ONE.doubleValue(), evaluator.evaluate(variable), 0);
 
-        evaluator = new FormulaEvaluator( "N!#c", "#a<=#b"
+        evaluator = new FormulaEvaluator("N!#c", "#a<=#b"
                 , OperatorEnhanceUtils.getOperators(), null);
         assertNull(evaluator.evaluate(variable));
     }
 
+    @Test
+    public void evaluate11() {
+        IVariable variable = ResultMapBean.getInstance(4, 2, BigDecimal.ZERO);
+        variable.setValue("a", BigDecimal.TEN);
+
+        FormulaEvaluator evaluator = new FormulaEvaluator("#a", "#a + 100");
+
+        assertEquals(110d, evaluator.evaluate(variable), 0);
+    }
 
 
 }
